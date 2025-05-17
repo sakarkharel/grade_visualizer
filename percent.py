@@ -1,6 +1,13 @@
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 import time 
+from dotenv import load_dotenv
+import os 
+
+load_dotenv()
+
+username = os.getenv("MY_USERNAME")
+password = os.getenv("MY_PASSWORD")
 
 driver = webdriver.Chrome()
 driver.get("https://gap.westcliff.edu/")
@@ -8,8 +15,8 @@ driver.implicitly_wait(0.5)
 username_box = driver.find_element(by = By.ID, value = "inputName" )
 password_box = driver.find_element(by = By.ID, value = "inputPassword")
 submit_button = driver.find_element(by = By.CSS_SELECTOR, value  = "button")
-username_box.send_keys("BN210558")
-password_box.send_keys("Kharel1234##")
+username_box.send_keys(username)
+password_box.send_keys(password)
 submit_button.click()
 user_dropdown = driver.find_element(By.CLASS_NAME, "userbutton")
 user_dropdown.click()
