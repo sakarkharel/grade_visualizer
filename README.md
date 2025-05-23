@@ -27,9 +27,9 @@ This project uses Python and selenium library to fetch data from the Westcliff M
 5. **Create a .env file** 
 
 
-    USERNAME=your_studentID
-    
-    PASSWORD=your_password
+    MY_USERNAME=your_studentID
+
+    MY_PASSWORD=your_password
 
 6. **Give execute permission to the script** 
 
