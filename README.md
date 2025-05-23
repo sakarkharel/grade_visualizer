@@ -28,6 +28,7 @@ This project uses Python and selenium library to fetch data from the Westcliff M
 
 
     USERNAME=your_studentID
+    
     PASSWORD=your_password
 
 6. **Give execute permission to the script** 
