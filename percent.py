@@ -5,48 +5,56 @@ import time
 from dotenv import load_dotenv
 import os 
 
-load_dotenv()
 
-username = os.getenv("MY_USERNAME")
-password = os.getenv("MY_PASSWORD")
+def load_credentials():
+    load_dotenv()
+    username = os.getenv("MY_USERNAME")
+    password = os.getenv("MY_PASSWORD")
+    return username, password
+    
+    
+def setup_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.implicitly_wait(0.5)
+    return driver
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")
+def login(driver, username, password):
+    driver.get("https://gap.westcliff.edu/")
+    driver.find_element(By.ID, "inputName").send_keys(username)
+    driver.find_element(By.ID, "inputPassword").send_keys(password)
+    driver.find_element(By.CSS_SELECTOR, "button").click()
 
-driver = webdriver.Chrome(options=chrome_options)
-driver.get("https://gap.westcliff.edu/")
-driver.implicitly_wait(0.5)
-username_box = driver.find_element(by = By.ID, value = "inputName" )
-password_box = driver.find_element(by = By.ID, value = "inputPassword")
-submit_button = driver.find_element(by = By.CSS_SELECTOR, value  = "button")
-username_box.send_keys(username)
-password_box.send_keys(password)
-submit_button.click()
-user_dropdown = driver.find_element(By.CLASS_NAME, "userbutton")
-user_dropdown.click()
-grades_link = driver.find_element(By.LINK_TEXT, "Grades")
-grades_link.click()
-time.sleep(5)  
-course1_text = driver.find_element(By.ID, value = "grade-report-overview-10498_r0_c0")
-course1_grades = driver.find_element(By.ID, value ="grade-report-overview-10498_r0_c1" )
-course2_text = driver.find_element(By.ID, value = "grade-report-overview-10498_r1_c0")
-course2_grades = driver.find_element(By.ID, value = "grade-report-overview-10498_r1_c1")
-course3_text = driver.find_element(By.ID, value = "grade-report-overview-10498_r2_c0")
-course3_grades = driver.find_element(By.ID, value = "grade-report-overview-10498_r2_c1")
-course4_text = driver.find_element(By.ID, value = "grade-report-overview-10498_r3_c0")
-course4_grades = driver.find_element(By.ID, value = "grade-report-overview-10498_r3_c1")
-course5_text = driver.find_element(By.ID, value = "grade-report-overview-10498_r4_c0")
-course5_grades = driver.find_element(By.ID, value = "grade-report-overview-10498_r4_c1")
-print(course1_text.text)
-print(course1_grades.text)
-print(course2_text.text)
-print(course2_grades.text)
-print(course3_text.text)
-print(course3_grades.text)
-print(course4_text.text)
-print(course4_grades.text)
-print(course5_text.text)
-print(course5_grades.text)
+def go_to_grades_page(driver):
+    driver.find_element(By.CLASS_NAME, "userbutton").click()
+    driver.find_element(By.LINK_TEXT, "Grades").click()
+    time.sleep(5)
+    
+def extract_grades(driver):
+    for i in range(5):
+        course_text = driver.find_element(By.ID, f"grade-report-overview-10498_r{i}_c0")
+        course_grade = driver.find_element(By.ID, f"grade-report-overview-10498_r{i}_c1")
+        print(course_text.text)
+        print(course_grade.text)  
+        
+def main():
+    username, password = load_credentials()
+    driver = setup_driver()
+    
+    try: 
+        login(driver, username, password)
+        go_to_grades_page(driver)
+        extract_grades(driver)
+    finally:
+        driver.quit()
+
+if __name__ == "__main__":
+    main()
+
+
+
+
 
 
 
