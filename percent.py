@@ -1,5 +1,6 @@
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options 
 import time 
 from dotenv import load_dotenv
 import os 
@@ -9,7 +10,10 @@ load_dotenv()
 username = os.getenv("MY_USERNAME")
 password = os.getenv("MY_PASSWORD")
 
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+
+driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://gap.westcliff.edu/")
 driver.implicitly_wait(0.5)
 username_box = driver.find_element(by = By.ID, value = "inputName" )
