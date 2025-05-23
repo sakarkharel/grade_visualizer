@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Gets the directory where the script is located
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "$PROJECT_DIR" || exit 1
+
+# Activate virtual environment which is  in the project folder
+source gpa/bin/activate
+
+# Run the Python script
+python3 percent.py
