@@ -4,27 +4,41 @@ This project uses Python and selenium library to fetch data from the Westcliff M
 
 ## Installation 
 
-1. Clone the Repository
-git clone https://github.com/sakarkharel/grade_visualizer.git
+1. **Clone the Repository**
 
-2. Create a virtual environment 
-python3 -m venv gpa
 
-3. Activate the virtual environment 
-source gpa/bin/activate 
+    git clone https://github.com/sakarkharel/grade_visualizer.git
 
-4. Install Dependencies 
-pip install -r requirements.txt 
+2. **Create a virtual environment**
 
-5. Create a .env file 
-USERNAME=your_studentID
-PASSWORD=your_password
 
-6. Give execute permission to the script 
-chmod +x kgpa 
+    python3 -m venv gpa
 
-7. Run the script 
-./kgpa 
+3. **Activate the virtual environment** 
+
+
+    source gpa/bin/activate 
+
+4. **Install Dependencies** 
+
+
+    pip install -r requirements.txt 
+
+5. **Create a .env file** 
+
+
+    USERNAME=your_studentID
+    PASSWORD=your_password
+
+6. **Give execute permission to the script** 
+
+
+    chmod +x kgpa 
+
+7. **Run the script** 
+
+
+    ./kgpa 
 
 
 
